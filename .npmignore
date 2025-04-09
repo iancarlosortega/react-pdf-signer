@@ -1,0 +1,13 @@
+/src
+/node_modules
+
+tsconfig.json
+rollup.config.js
+postcss.config.js
+
+package-lock.json
+.gitignore
+.git
+.vscode
+.DS_Store
+.idea
