@@ -31,28 +31,6 @@ export const PdfViewer = ({ pdfUrl, onPdfClick }: PdfViewerProps) => {
   const pageInputRef = useRef<HTMLInputElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
-    setNumPages(numPages)
-    setIsLoading(false)
-  }
-
-  function onDocumentLoadError(error: Error) {
-    console.error("Error loading PDF:", error)
-    setError("Error al cargar el PDF. Por favor, inténtelo de nuevo.")
-    setIsLoading(false)
-  }
-
-  function onPageLoadSuccess({ width, height }: { width: number; height: number }) {
-    setPageSize({ width, height })
-    setIsLoading(false)
-  }
-
-  function onPageLoadError(error: Error) {
-    console.error("Error loading page:", error)
-    setError(`Error al cargar la página ${currentPage}. Por favor, inténtelo de nuevo.`)
-    setIsLoading(false)
-  }
-
   // Reset loading state when changing pages
   useEffect(() => {
     setIsLoading(true)
@@ -75,6 +53,28 @@ export const PdfViewer = ({ pdfUrl, onPdfClick }: PdfViewerProps) => {
       }
     }
   }, [scale, pageSize])
+
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages)
+    setIsLoading(false)
+  }
+
+  const onDocumentLoadError = (error: Error) => {
+    console.error("Error loading PDF:", error)
+    setError("Error al cargar el PDF. Por favor, inténtelo de nuevo.")
+    setIsLoading(false)
+  }
+
+  const onPageLoadSuccess = ({ width, height }: { width: number; height: number }) => {
+    setPageSize({ width, height })
+    setIsLoading(false)
+  }
+
+  const onPageLoadError = (error: Error) => {
+    console.error("Error loading page:", error)
+    setError(`Error al cargar la página ${currentPage}. Por favor, inténtelo de nuevo.`)
+    setIsLoading(false)
+  }
 
   const handleConfirmSignature = () => {
     if (!signedPosition) return
@@ -268,8 +268,6 @@ export const PdfViewer = ({ pdfUrl, onPdfClick }: PdfViewerProps) => {
             </>
           )
         }
-
-
       </div>
 
       <div

@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Upload } from "../icons/Upload";
 import { cn } from "../utils/cn";
+import { Button } from "./button";
 
 interface UploadPDFProps {
   onFileChange: (file: File) => void;
@@ -33,16 +34,11 @@ export const UploadPDF = ({ onFileChange, className, children }: UploadPDFProps)
         className='hidden'
         data-testid='pdf-upload'
       />
-      <button onClick={handleButtonClick} className={
-        cn(
-          "border bg-white text-black hover:bg-gray-50 transition-colors rounded-md px-4 py-2 flex items-center gap-2",
-          className,
-        )
-      }>
+      <Button onClick={handleButtonClick} className={className}>
         {
           children ? children : <><Upload className='size-4'/> Firmar PDF</>
         }
-      </button>
+      </Button>
     </div>
   );
 }
